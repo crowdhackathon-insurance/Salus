@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @feeling.day %>
+</p>
+
+<p>
+  <strong>Moring feeling:</strong>
+  <%= @feeling.moring_feeling %>
+</p>
+
+<p>
+  <strong>Sentiment analysis:</strong>
+  <%= @feeling.sentiment_analysis %>
+</p>
+
+<%= link_to 'Edit', edit_feeling_path(@feeling) %> |
+<%= link_to 'Back', feelings_path %>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  day: 2016-10-01 17:12:04
+  moring_feeling: 1.5
+  sentiment_analysis: 1.5
+
+two:
+  day: 2016-10-01 17:12:04
+  moring_feeling: 1.5
+  sentiment_analysis: 1.5
