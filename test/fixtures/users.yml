@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  weight: 1.5
+  height: 1.5
+  picture_url: MyString
+  fit: false
+  smoke: false
+
+two:
+  first_name: MyString
+  last_name: MyString
+  weight: 1.5
+  height: 1.5
+  picture_url: MyString
+  fit: false
+  smoke: false
