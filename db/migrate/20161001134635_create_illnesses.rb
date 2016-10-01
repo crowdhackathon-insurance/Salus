@@ -3,7 +3,7 @@ class CreateIllnesses < ActiveRecord::Migration[5.0]
     create_table :illnesses do |t|
       t.text :symptom
       t.boolean :hospital
-      t.json :data
+      t.text :data
       t.integer :appointment_id
 
       t.timestamps
