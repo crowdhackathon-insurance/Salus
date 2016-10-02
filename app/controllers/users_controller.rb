@@ -38,6 +38,7 @@ class UsersController < ApplicationController
       else
         @user = User.create!(user_token: request.headers["user_token"], first_name: response['result']['first_name'], last_name: response['result']['last_name'], profile_image: response['result']['profile_image'] )
       end
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
