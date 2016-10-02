@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       resp = conn1.post do |req|
         req.url '/api/user/'
         req.headers['Content-Type'] = 'application/json'
-        #req.headers['user_token'] = request.headers["user_token"] rescue 'null'
+        req.headers['token'] = request.headers["user_token"] rescue 'null'
       end
       response = JSON.parse resp.body rescue nil
       if (not response) || (response['success'] == 0) then
