@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @user = @user.update(user_params)
 
     respond_to do |format|
-      if @user.save
+      if @user
         format.json { render json: @user.to_json }
       else
         format.json { render json: @user.errors }
