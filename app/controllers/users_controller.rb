@@ -18,7 +18,8 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_api
-      @user = User.find_by(user_token:request.headers["user_token"])
+      token = request.headers["user_token"]
+      @user = User.find_by(user_token:token)
       if not @user then 
 
       conn1 = Faraday.new(:url => 'https://mindnodesbot.herokuapp.com') do |faraday|
@@ -27,18 +28,18 @@ class UsersController < ApplicationController
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
       end
       puts '#############################'
-      puts request.headers["user_token"]
+      puts token
       resp = conn1.post do |req|
         req.url '/api/user/'
         req.headers['Content-Type'] = 'application/json'
-        req.headers['token'] = request.headers["user_token"] rescue 'null'
+        req.headers['token'] = token rescue 'null'
       end
       response = JSON.parse resp.body rescue nil
       if (not response) || (response['success'] == 0) then
         raise ActionController::RoutingError.new('Not Found')
         return
       else
-        @user = User.create!(user_token: request.headers["user_token"], first_name: response['result']['first_name'], last_name: response['result']['last_name'], profile_image: response['result']['profile_image'] )
+        @user = User.create!(user_token: token, first_name: response['result']['first_name'], last_name: response['result']['last_name'], profile_image: response['result']['profile_image'] )
       end
       end
     end
