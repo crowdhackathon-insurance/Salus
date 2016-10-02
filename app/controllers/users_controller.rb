@@ -26,7 +26,8 @@ class UsersController < ApplicationController
         faraday.response :logger                  # log requests to STDOUT
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
       end
-      puts '#############################' + request.headers["user_token"]
+      puts '#############################'
+      puts request.headers
       resp = conn1.post do |req|
         req.url '/api/user/'
         req.headers['Content-Type'] = 'application/json'
