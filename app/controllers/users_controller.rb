@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def get_hearth_rate
     respond_to do |format|
-        format.json { render json: {"heart_rate" : 35 }.to_json }
+        format.json { render json: {"heart_rate" => 35 }.to_json }
     end
   end
 
