@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
       end
       puts '#############################'
-      puts request.headers
+      puts request.headers.inspect
       resp = conn1.post do |req|
         req.url '/api/user/'
         req.headers['Content-Type'] = 'application/json'
