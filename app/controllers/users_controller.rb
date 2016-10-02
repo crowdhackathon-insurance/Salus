@@ -14,6 +14,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_hearth_rate
+    respond_to do |format|
+        format.json { render json: {"heart_rate" : 35 }.to_json }
+    end
+  end
+
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -27,8 +34,6 @@ class UsersController < ApplicationController
         faraday.response :logger                  # log requests to STDOUT
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
       end
-      puts '#############################'
-      puts token
       resp = conn1.post do |req|
         req.url '/api/user/'
         req.headers['Content-Type'] = 'application/json'
