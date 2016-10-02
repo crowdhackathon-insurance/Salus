@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user_api, only: [:update_user_data, :insert_feeling, :make_appointment, :get_hearth_rate]
-
+  protect_from_forgery :except => [:update_user_data, :insert_feeling, :make_appointment, :get_hearth_rate]
 
   def update_user_data
     @user = User.new(user_params)
