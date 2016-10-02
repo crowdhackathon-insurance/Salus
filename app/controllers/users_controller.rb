@@ -1,74 +1,47 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_api, only: [:update_user_data, :insert_feeling, :make_appointment, :get_hearth_rate]
 
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
-  end
 
-  # GET /users/1
-  # GET /users/1.json
-  def show
-  end
-
-  # GET /users/new
-  def new
-    @user = User.new
-  end
-
-  # GET /users/1/edit
-  def edit
-  end
-
-  # POST /users
-  # POST /users.json
-  def create
+  def update_user_data
     @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        format.json { render json: @user.to_json }
       else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors }
       end
     end
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
-  def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /users/1
-  # DELETE /users/1.json
-  def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
+    def set_user_api
+      @user = User.find_by(user_token:request.headers["user_token"])
+      if not @user then 
+
+      conn1 = Faraday.new(:url => 'https://mindnodesbot.herokuapp.com') do |faraday|
+        faraday.request  :url_encoded             # form-encode POST params
+        faraday.response :logger                  # log requests to STDOUT
+        faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+      end
+      resp = @conn1.post do |req|
+        req.url '/api/user/'
+        req.headers['Content-Type'] = 'application/json'
+        req.headers['user_token'] = request.headers["user_token"] rescue 'null'
+      end
+      response = JSON.parse resp.body rescue nil
+      if (not response) || (response['success'] == 0) then
+        raise ActionController::RoutingError.new('Not Found')
+        return
+      else
+        @user = User.create!(user_token: request.headers["user_token"], first_name: response['result']['first_name'], last_name: response['result']['last_name'], profile_image: response['result']['profile_image'] )
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :weight, :height, :picture_url, :fit, :smoke)
+      params.require(:user).permit(:user_token, :first_name, :last_name, :age, :weight, :height, :smoke, :fit)
     end
 end

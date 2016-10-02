@@ -11,6 +11,11 @@
 </p>
 
 <p>
+  <strong>Age:</strong>
+  <%= @user.age %>
+</p>
+
+<p>
   <strong>Weight:</strong>
   <%= @user.weight %>
 </p>
@@ -21,18 +26,13 @@
 </p>
 
 <p>
-  <strong>Picture url:</strong>
-  <%= @user.picture_url %>
+  <strong>Smoke:</strong>
+  <%= @user.smoke %>
 </p>
 
 <p>
   <strong>Fit:</strong>
   <%= @user.fit %>
-</p>
-
-<p>
-  <strong>Smoke:</strong>
-  <%= @user.smoke %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

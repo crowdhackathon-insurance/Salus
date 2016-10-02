@@ -22,6 +22,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :age %>
+    <%= f.number_field :age %>
+  </div>
+
+  <div class="field">
     <%= f.label :weight %>
     <%= f.text_field :weight %>
   </div>
@@ -32,18 +37,13 @@
   </div>
 
   <div class="field">
-    <%= f.label :picture_url %>
-    <%= f.text_field :picture_url %>
+    <%= f.label :smoke %>
+    <%= f.check_box :smoke %>
   </div>
 
   <div class="field">
     <%= f.label :fit %>
     <%= f.check_box :fit %>
-  </div>
-
-  <div class="field">
-    <%= f.label :smoke %>
-    <%= f.check_box :smoke %>
   </div>
 
   <div class="actions">
