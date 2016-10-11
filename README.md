@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Pdf Presentation](Salus.pdf)
 
-Things you may want to cover:
+[MindNodes](http://mindnodes.com)
 
-* Ruby version
+[MindNodes Facebook](http://fb.me/mindnodes)
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
